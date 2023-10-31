@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd"
+        logicalFilePath="liquibase/databaseChangeLog.xml">
+
+    <changeSet id="create-initial-tables" author="Andrin Meier">
+        <createTable schemaName="pet_shop" tableName="tbl_pet">
+            <column name="pet_id" type="SERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pet_category_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="vendor_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pet_images" type="BYTEA">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pet_status" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable schemaName="pet_shop" tableName="tbl_pet_category">
+            <column name="pet_category_id" type="SERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="pet_category_name" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable schemaName="pet_shop" tableName="tbl_pet_product_category">
+            <column name="product_category_id" type="SERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="category_name" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable schemaName="pet_shop" tableName="tbl_pet_product">
+            <column name="pet_product_id" type="SERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="product_code" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_name" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_detail" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_category_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quantity_on_hand" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="vendor_price" type="FLOAT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="retail_price" type="FLOAT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="discount" type="FLOAT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="vendor_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable schemaName="pet_shop" tableName="tbl_order">
+            <column name="order_id" type="SERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="reference_no" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="customer_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="order_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="order_status" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="expected_delivery_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="total_amount" type="FLOAT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="number_of_items" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable schemaName="pet_shop" tableName="tbl_order_detail">
+            <column name="order_detail_id" type="SERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="order_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pet_product_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quantity" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quantity_price" type="FLOAT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="remarks" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="vendor_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable schemaName="pet_shop" tableName="tbl_service">
+            <column name="service_id" type="SERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="reference_no" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="service_name" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="service_detail" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="service_fee" type="FLOAT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="vendor_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable schemaName="pet_shop" tableName="tbl_customer">
+            <column name="customer_id" type="SERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="customer_code" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="avatar" type="BYTEA">
+                <constraints nullable="false"/>
+            </column>
+            <column name="customer_name" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email_address" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contact_number" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="complete_address" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="username" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable schemaName="pet_shop" tableName="tbl_payment">
+            <column name="payment_id" type="SERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="reference_no" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="payment_for" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="amount_paid" type="FLOAT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="remarks" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="payment_status" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="paid_by" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable schemaName="pet_shop" tableName="tbl_vendor">
+            <column name="company_id" type="SERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="company_name" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="company_contact_person" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="company_email" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="company_contact_number" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="company_website" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="company_profile" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="vendor_username" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="vendor_password" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable schemaName="pet_shop" tableName="tbl_user">
+            <column name="user_id" type="SERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="username" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="avatar" type="BYTEA">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fullname" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contact" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_category_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable schemaName="pet_shop" tableName="tbl_user_group">
+            <column name="user_group_id" type="SERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="group_name" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="allow_add" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="allow_edit" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="allow_delete" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="allow_print" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="allow_import" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="allow_export" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <!-- tbl_customer -->
+        <createIndex schemaName="pet_shop" tableName="tbl_customer" indexName="ix_cust_user_id">
+            <column name="user_id"/>
+        </createIndex>
+
+        <!-- tbl_order -->
+        <createIndex schemaName="pet_shop" tableName="tbl_order" indexName="ix_ord_customer_id">
+            <column name="customer_id"/>
+        </createIndex>
+        <createIndex schemaName="pet_shop" tableName="tbl_order" indexName="ix_ord_user_id">
+            <column name="user_id"/>
+        </createIndex>
+
+        <!-- tbl_order_detail -->
+        <createIndex schemaName="pet_shop" tableName="tbl_order_detail" indexName="ix_orddet_order_id">
+            <column name="order_id"/>
+        </createIndex>
+        <createIndex schemaName="pet_shop" tableName="tbl_order_detail" indexName="ix_orddet_prod_id">
+            <column name="pet_product_id"/>
+        </createIndex>
+        <createIndex schemaName="pet_shop" tableName="tbl_order_detail" indexName="ix_orddet_vendor_id">
+            <column name="vendor_id"/>
+        </createIndex>
+
+        <!-- tbl_payment -->
+        <createIndex schemaName="pet_shop" tableName="tbl_payment" indexName="ix_pay_user_id">
+            <column name="user_id"/>
+        </createIndex>
+
+        <!-- tbl_pet -->
+        <createIndex schemaName="pet_shop" tableName="tbl_pet" indexName="ix_pet_pcat_id">
+            <column name="pet_category_id"/>
+        </createIndex>
+        <createIndex schemaName="pet_shop" tableName="tbl_pet" indexName="ix_pet_vend_id">
+            <column name="vendor_id"/>
+        </createIndex>
+        <createIndex schemaName="pet_shop" tableName="tbl_pet" indexName="ix_pet_user_id">
+            <column name="user_id"/>
+        </createIndex>
+
+        <!-- tbl_pet_category-->
+        <createIndex schemaName="pet_shop" tableName="tbl_pet_category" indexName="ix_pcat_user_id">
+            <column name="user_id"/>
+        </createIndex>
+
+        <!-- tbl_pet_product -->
+        <createIndex schemaName="pet_shop" tableName="tbl_pet_product" indexName="ix_pprod_prodcat_id">
+            <column name="product_category_id"/>
+        </createIndex>
+        <createIndex schemaName="pet_shop" tableName="tbl_pet_product" indexName="ix_pprod_vendor_id">
+            <column name="vendor_id"/>
+        </createIndex>
+        <createIndex schemaName="pet_shop" tableName="tbl_pet_product" indexName="ix_pprod_user_id">
+            <column name="user_id"/>
+        </createIndex>
+
+        <!-- tbl_pet_product_category -->
+        <createIndex schemaName="pet_shop" tableName="tbl_pet_product_category" indexName="ix_pprcat_user_id">
+            <column name="user_id"/>
+        </createIndex>
+
+        <!-- tbl_service -->
+        <createIndex schemaName="pet_shop" tableName="tbl_service" indexName="ix_serv_vendor_id">
+            <column name="vendor_id"/>
+        </createIndex>
+        <createIndex schemaName="pet_shop" tableName="tbl_service" indexName="ix_serv_user_id">
+            <column name="user_id"/>
+        </createIndex>
+
+        <!-- tbl_user -->
+        <createIndex schemaName="pet_shop" tableName="tbl_user" indexName="ix_user_cat_id">
+            <column name="user_category_id"/>
+        </createIndex>
+
+        <!-- tbl_vendor -->
+        <createIndex schemaName="pet_shop" tableName="tbl_vendor" indexName="ix_vendor_user_id">
+            <column name="user_id"/>
+        </createIndex>
+
+        <!-- tbl_customer -->
+        <addForeignKeyConstraint baseTableSchemaName="pet_shop"
+                                 referencedTableSchemaName="pet_shop"
+                                 constraintName="tbl_customer_ibfk_1"
+                                 baseColumnNames="user_id"
+                                 baseTableName="tbl_customer"
+                                 referencedColumnNames="user_id"
+                                 referencedTableName="tbl_user"/>
+
+        <!-- tbl_order -->
+        <addForeignKeyConstraint baseTableSchemaName="pet_shop"
+                                 referencedTableSchemaName="pet_shop"
+                                 constraintName="tbl_order_ibfk_1"
+                                 baseColumnNames="user_id"
+                                 baseTableName="tbl_order"
+                                 referencedColumnNames="user_id"
+                                 referencedTableName="tbl_user"/>
+        <addForeignKeyConstraint baseTableSchemaName="pet_shop"
+                                 referencedTableSchemaName="pet_shop"
+                                 constraintName="tbl_order_ibfk_2"
+                                 baseColumnNames="customer_id"
+                                 baseTableName="tbl_order"
+                                 referencedColumnNames="customer_id"
+                                 referencedTableName="tbl_customer"/>
+
+        <!-- tbl_order_detail -->
+        <addForeignKeyConstraint baseTableSchemaName="pet_shop"
+                                 referencedTableSchemaName="pet_shop"
+                                 constraintName="tbl_order_detail_ibfk_1"
+                                 baseColumnNames="pet_product_id"
+                                 baseTableName="tbl_order_detail"
+                                 referencedColumnNames="pet_product_id"
+                                 referencedTableName="tbl_pet_product"/>
+        <addForeignKeyConstraint baseTableSchemaName="pet_shop"
+                                 referencedTableSchemaName="pet_shop"
+                                 constraintName="tbl_order_detail_ibfk_2"
+                                 baseColumnNames="order_id"
+                                 baseTableName="tbl_order_detail"
+                                 referencedColumnNames="order_id"
+                                 referencedTableName="tbl_order"/>
+        <addForeignKeyConstraint baseTableSchemaName="pet_shop"
+                                 referencedTableSchemaName="pet_shop"
+                                 constraintName="tbl_order_detail_ibfk_3"
+                                 baseColumnNames="vendor_id"
+                                 baseTableName="tbl_order_detail"
+                                 referencedColumnNames="company_id"
+                                 referencedTableName="tbl_vendor"/>
+
+        <!-- tbl_payment -->
+        <addForeignKeyConstraint baseTableSchemaName="pet_shop"
+                                 referencedTableSchemaName="pet_shop"
+                                 constraintName="tbl_payment_ibfk_1"
+                                 baseColumnNames="user_id"
+                                 baseTableName="tbl_payment"
+                                 referencedColumnNames="user_id"
+                                 referencedTableName="tbl_user"/>
+
+        <!-- tbl_pet -->
+        <addForeignKeyConstraint baseTableSchemaName="pet_shop"
+                                 referencedTableSchemaName="pet_shop"
+                                 constraintName="tbl_pet_ibfk_1"
+                                 baseColumnNames="user_id"
+                                 baseTableName="tbl_pet"
+                                 referencedColumnNames="user_id"
+                                 referencedTableName="tbl_user"/>
+        <addForeignKeyConstraint baseTableSchemaName="pet_shop"
+                                 referencedTableSchemaName="pet_shop"
+                                 constraintName="tbl_pet_ibfk_2"
+                                 baseColumnNames="pet_category_id"
+                                 baseTableName="tbl_pet"
+                                 referencedColumnNames="pet_category_id"
+                                 referencedTableName="tbl_pet_category"/>
+        <addForeignKeyConstraint baseTableSchemaName="pet_shop"
+                                 referencedTableSchemaName="pet_shop"
+                                 constraintName="tbl_pet_ibfk_3"
+                                 baseColumnNames="vendor_id"
+                                 baseTableName="tbl_pet"
+                                 referencedColumnNames="company_id"
+                                 referencedTableName="tbl_vendor"/>
+
+        <!-- tbl_pet_category -->
+        <addForeignKeyConstraint baseTableSchemaName="pet_shop"
+                                 referencedTableSchemaName="pet_shop"
+                                 constraintName="tbl_pet_category_ibfk_1"
+                                 baseColumnNames="user_id"
+                                 baseTableName="tbl_pet_category"
+                                 referencedColumnNames="user_id"
+                                 referencedTableName="tbl_user"/>
+
+        <!-- tbl_pet_product -->
+        <addForeignKeyConstraint baseTableSchemaName="pet_shop"
+                                 referencedTableSchemaName="pet_shop"
+                                 constraintName="tbl_pet_product_ibfk_1"
+                                 baseColumnNames="user_id"
+                                 baseTableName="tbl_pet_product"
+                                 referencedColumnNames="user_id"
+                                 referencedTableName="tbl_user"/>
+        <addForeignKeyConstraint baseTableSchemaName="pet_shop"
+                                 referencedTableSchemaName="pet_shop"
+                                 constraintName="tbl_pet_product_ibfk_2"
+                                 baseColumnNames="product_category_id"
+                                 baseTableName="tbl_pet_product"
+                                 referencedColumnNames="product_category_id"
+                                 referencedTableName="tbl_pet_product_category"/>
+
+        <!-- tbl_pet_category -->
+        <addForeignKeyConstraint baseTableSchemaName="pet_shop"
+                                 referencedTableSchemaName="pet_shop"
+                                 constraintName="tbl_pet_product_category_ibfk_1"
+                                 baseColumnNames="user_id"
+                                 baseTableName="tbl_pet_category"
+                                 referencedColumnNames="user_id"
+                                 referencedTableName="tbl_user"/>
+
+        <!-- tbl_service -->
+        <addForeignKeyConstraint baseTableSchemaName="pet_shop"
+                                 referencedTableSchemaName="pet_shop"
+                                 constraintName="tbl_service_ibfk_1"
+                                 baseColumnNames="user_id"
+                                 baseTableName="tbl_service"
+                                 referencedColumnNames="user_id"
+                                 referencedTableName="tbl_user"/>
+        <addForeignKeyConstraint baseTableSchemaName="pet_shop"
+                                 referencedTableSchemaName="pet_shop"
+                                 constraintName="tbl_service_ibfk_2"
+                                 baseColumnNames="vendor_id"
+                                 baseTableName="tbl_service"
+                                 referencedColumnNames="company_id"
+                                 referencedTableName="tbl_vendor"/>
+
+        <!-- tbl_user -->
+        <addForeignKeyConstraint baseTableSchemaName="pet_shop"
+                                 referencedTableSchemaName="pet_shop"
+                                 constraintName="tbl_user_ibfk_1"
+                                 baseColumnNames="user_category_id"
+                                 baseTableName="tbl_user"
+                                 referencedColumnNames="user_group_id"
+                                 referencedTableName="tbl_user_group"/>
+
+        <!-- tbl_vendor -->
+        <addForeignKeyConstraint baseTableSchemaName="pet_shop"
+                                 referencedTableSchemaName="pet_shop"
+                                 constraintName="tbl_vendor_ibfk_1"
+                                 baseColumnNames="user_id"
+                                 baseTableName="tbl_vendor"
+                                 referencedColumnNames="user_id"
+                                 referencedTableName="tbl_user"/>
+
+    </changeSet>
+</databaseChangeLog>
